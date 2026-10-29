@@ -1,52 +1,36 @@
-# 🧮 BMI Calculator (Tkinter)
+# BMI Calculator (Tkinter)
 
-A simple **BMI Calculator** built using Python's Tkinter library.  
-This app takes **Weight (kg)** and **Height (m)** as input, calculates the **BMI**, and displays the result with proper formatting.
+A simple BMI calculator built with Python's Tkinter library.
+It takes weight (kg) and height (m) as input, calculates the BMI and shows the result
+with its category (Underweight, Normal weight, Overweight or Obese).
 
----
+## Features
+- Clean layout with weight, height, formula and a Calculate button
+- Light blue background (`#EAF6FF`)
+- Error handling: shows a message if the input is empty, not a number or not above zero
+- BMI shown up to two decimal places, with its category
 
-## ✨ Features
-- 🖼 **Clean UI** – Weight, Height, Formula, and Button arranged neatly.  
-- 🎨 **Light Blue Background** (`#EAF6FF`) for a pleasant look.  
-- 🛡 **Error Handling** – Shows a message if input is invalid (non-numeric or empty).  
-- 📊 **Accurate Results** – Displays BMI up to **two decimal places**.  
+## Screenshot
+![BMI Calculator](python%20calculator%20image.png)
 
----
-
-## 🖼 Screenshot  
-(Add a screenshot here if you want – optional)
-
----
-
-## 🚀 How to Run
-1. Make sure you have **Python 3.x** installed.
-2. Clone this repository or download the code.
+## How to run
+1. Install Python 3.x (Tkinter comes with Python on Windows).
+2. Download or clone this repository.
 3. Run the script:
-
    ```bash
    python bmi_calculator.py
    ```
 
----
-
-## 📂 File Structure
+## File structure
 ```
-bmi-calculator/
-│
-├── bmi_calculator.py   # Main script
-└── README.md           # Project documentation
+BMI_calculator_weight_height/
+├── bmi_calculator.py          # Main script
+├── python calculator image.png  # Screenshot
+└── README.md                  # Project documentation
 ```
 
----
+## Formula
+BMI = weight (kg) / height (m)²
 
-## 🧠 Formula Used
-BMI is calculated using the formula:
-
-\[
-\text{BMI} = \frac{\text{Weight (kg)}}{\text{Height (m)}^2}
-\]
-
----
-
-👨‍💻 **Author:** Tanzeel8
-⭐ If you like this project, consider giving it a star on GitHub!
+## Author
+Tanzeel Ur Rehman ([@Tanzeel8](https://github.com/Tanzeel8))
