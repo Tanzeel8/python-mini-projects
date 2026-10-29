@@ -1,32 +1,39 @@
 import tkinter as tk
 
+
+def compute(num1, op, num2):
+    """Return the result of num1 <op> num2, or an error message."""
+    if op == "+":
+        return num1 + num2
+    elif op == "-":
+        return num1 - num2
+    elif op == "*":
+        return num1 * num2
+    elif op == "/":
+        return num1 / num2 if num2 != 0 else "Cannot divide by zero"
+    elif op == "%":
+        return num1 % num2 if num2 != 0 else "Cannot divide by zero"
+    elif op == "**":
+        return num1 ** num2
+    return "Invalid operator"
+
+
 def calculate():
     try:
         num1 = float(entry1.get())
         num2 = float(entry2.get())
-        op = operator.get()
-
-        if op == '+':
-            res = num1 + num2
-        elif op == '-':
-            res = num1 - num2
-        elif op == '*':
-            res = num1 * num2
-        elif op == '/':
-            res = num1 / num2 if num2 != 0 else "Cannot divide by zero"
-        elif op == '%':
-            res = num1 % num2
-        elif op == '**':
-            res = num1 ** num2
-        else:
-            res = "Invalid operator"
+        op = operator.get().strip()
+        res = compute(num1, op, num2)
         result_label.config(text=f"Result: {res}")
-    except:
-        result_label.config(text="Error in input")
+    except ValueError:
+        result_label.config(text="Please enter valid numbers")
+    except OverflowError:
+        result_label.config(text="Result is too large")
+
 
 # GUI setup
 root = tk.Tk()
-root.title("Simple Python Calculator")
+root.title("Basic GUI Calculator")
 
 tk.Label(root, text="Enter First Number:").pack()
 entry1 = tk.Entry(root)
