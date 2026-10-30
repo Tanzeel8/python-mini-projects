@@ -1,5 +1,6 @@
 import random
 
+
 def rps():
     choices = ["rock", "paper", "scissors"]
     comp = random.choice(choices)
@@ -28,22 +29,24 @@ def guess_number():
 
     print("Guess a number between 1 and 20. You have", attempts, "tries.")
 
-    for i in range(attempts):
+    while attempts > 0:
         try:
             g = int(input("Your guess: "))
         except ValueError:
-            print("Enter a number.")
+            print("Enter a number.")  # invalid input does not use up a try
             continue
+
+        attempts -= 1
 
         if g == number:
             print("Correct! You won.")
             return
         elif g < number:
-            print("Too low.")
+            print("Too low.", attempts, "tries left.")
         else:
-            print("Too high.")
+            print("Too high.", attempts, "tries left.")
 
-    print("Out of attempts. Number was", number)
+    print("Out of attempts. The number was", number)
 
 
 def main():
