@@ -1,10 +1,15 @@
-# Line-by-line PDF translation: English to Urdu
+# Line-by-line PDF translation: English to Urdu (MyMemory translator)
 import threading
+import time
 import tkinter as tk
 from tkinter import filedialog, messagebox
 
 import fitz  # PyMuPDF
-from deep_translator import GoogleTranslator
+from deep_translator import MyMemoryTranslator
+
+# Optional: put your email here to raise the free daily limit
+# (about 5,000 characters/day without email, about 50,000 with email).
+EMAIL = ""
 
 
 def select_pdf():
@@ -25,6 +30,20 @@ def finish(error=None):
         messagebox.showerror("Error", error)
 
 
+def safe_translate(translator, text, retries=3):
+    """Translate one line; retry with a wait if the server complains."""
+    for attempt in range(retries):
+        try:
+            result = translator.translate(text)
+            if result and "MYMEMORY WARNING" in result.upper():
+                return "[Daily free limit reached. Try again tomorrow or add EMAIL in the code.]"
+            return result or text
+        except Exception as e:
+            if attempt == retries - 1:
+                return f"[Translation failed: {e}]"
+            time.sleep(2 * (attempt + 1))  # wait 2s, 4s
+
+
 def translate_pdf():
     file_path = entry_pdf_path.get().strip()
     if not file_path.lower().endswith(".pdf"):
@@ -38,7 +57,10 @@ def translate_pdf():
 
 def translate_pdf_thread(file_path):
     try:
-        translator = GoogleTranslator(source="en", target="ur")
+        kwargs = {"source": "english", "target": "urdu"}
+        if EMAIL:
+            kwargs["email"] = EMAIL
+        translator = MyMemoryTranslator(**kwargs)
         found_text = False
 
         with fitz.open(file_path) as doc:
@@ -48,10 +70,8 @@ def translate_pdf_thread(file_path):
                     if not line:
                         continue
                     found_text = True
-                    try:
-                        translated = translator.translate(line) or line
-                    except Exception as e:
-                        translated = f"[Translation failed: {e}]"
+                    translated = safe_translate(translator, line)
+                    time.sleep(0.3)  # be gentle with the server
                     root.after(0, append_text, f"English: {line}\nUrdu: {translated}\n\n")
 
         if found_text:
