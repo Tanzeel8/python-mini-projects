@@ -1,30 +1,19 @@
-# 📘 Setup Guide
+# PDF Translator (English to Urdu)
 
-## 1. Install Python  
-If you don’t have Python on your system, download and install it from:  
-👉 [https://www.python.org/downloads/](https://www.python.org/downloads/)
+A simple desktop app that reads a PDF and translates it line by line into Urdu.
 
----
+![Screenshot](translator_screenshot.png)
 
-## 2. Install Required Libraries  
+## Setup
+1. Install Python from https://www.python.org/downloads/
+2. Install libraries:
+   pip install -r requirements.txt
+3. Run:
+   python pdf_translator.py
 
-Open **Terminal (Mac/Linux)** or **CMD (Windows)** and run these commands one by one:  
-
-```bash
-pip install pymupdf
-pip install deep-translator
-```
-
----
-
-## 3. Tkinter Note  
-- **Windows**: Already included with Python.  
-- **Mac**: Usually comes preinstalled.  
-- **Linux (if not working)**: Run this command →  
-  ```bash
-  sudo apt install python3-tk
-  ```
-
----
-
-✅ Now you’re ready to use the script! 🎉  
+## Notes
+- Internet connection required.
+- Uses the free MyMemory translation API (daily free limit applies;
+  you can add your email in the code to raise it).
+- Scanned/image-only PDFs are not supported (no OCR).
+- Windows: Tkinter is included with Python. Linux: sudo apt install python3-tk
