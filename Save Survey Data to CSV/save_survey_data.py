@@ -1,6 +1,10 @@
 import csv
+from pathlib import Path
 
 FIELDNAMES = ["Name", "Age", "Gender", "Rating", "Comments"]
+
+# The CSV is saved next to this script, whichever folder you run it from
+OUTPUT_FILE = Path(__file__).resolve().parent / "survey_data.csv"
 
 # Survey data
 survey_data = [
@@ -10,7 +14,7 @@ survey_data = [
 ]
 
 
-def save_survey(data, filename="survey_data.csv"):
+def save_survey(data, filename=OUTPUT_FILE):
     """Save a list of survey answers (dictionaries) to a CSV file."""
     with open(filename, mode="w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=FIELDNAMES)
@@ -25,7 +29,7 @@ def average_rating(data):
 
 def main():
     save_survey(survey_data)
-    print("Survey data saved to 'survey_data.csv' ✅")
+    print(f"Survey data saved to '{OUTPUT_FILE}' ✅")
     print(f"Average rating: {average_rating(survey_data):.1f} / 5")
 
 
